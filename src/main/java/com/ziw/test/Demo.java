@@ -12,6 +12,9 @@ public class Demo {
 			("spring/applicationContext.xml");
 	
 	public static void main(String[] args) {
+		
+		System.out.println("123123");
+		
 //		UserController a = (UserController) ac.getBean("userController");
 //		a.dododo();
 	
