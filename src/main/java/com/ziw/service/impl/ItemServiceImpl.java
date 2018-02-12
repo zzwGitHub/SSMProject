@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ziw.mapper.TbContentMapper;
 import com.ziw.mapper.TbItemMapper;
@@ -37,6 +38,7 @@ public class ItemServiceImpl implements ItemService {
 		return 1;
 	}
 	
+	@Transactional
 	public int saveItem() {
 		TbContent content = new TbContent();
 		content.setId(genItemId());
