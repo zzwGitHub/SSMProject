@@ -1,9 +1,16 @@
 package com.ziw.controller;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import com.ziw.service.ItemService;
 
@@ -36,6 +43,14 @@ public class ItemController {
 		
 		itemService.testJdbcTemplate();
 		return "result";
+	}
+	
+	@RequestMapping("/test3")
+	@ResponseBody
+	public ModelAndView test3(){
+		ModelAndView model = new ModelAndView();
+		model.setViewName("result");
+		return model;
 	}
 	
 	

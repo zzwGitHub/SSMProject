@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>开始！</h1>
-<a href="http://127.0.0.1:8080/item/test"><input type="button" value="BUTTON"></a>
+<a href="<%=request.getContextPath()%>/item/test3"><input type="button" value="BUTTON"></a>
 
 </body>
 
