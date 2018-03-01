@@ -1,5 +1,6 @@
 package com.ziw.service.impl;
 
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +9,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ziw.mapper.TbContentMapper;
 import com.ziw.mapper.TbItemMapper;
 import com.ziw.pojo.TbContent;
 import com.ziw.pojo.TbItem;
+import com.ziw.pojo.TbItemExample;
+import com.ziw.pojo.TbItemExample.Criteria;
 import com.ziw.service.ItemService;
 import com.ziw.util.DBHelper;
+import com.ziw.utilmodel.BootstrapTableResult;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -38,6 +44,9 @@ public class ItemServiceImpl implements ItemService {
 		return 1;
 	}
 	
+	/**
+	 * 测试事务
+	 */
 	@Transactional
 	public int saveItem() {
 		TbContent content = new TbContent();
@@ -46,8 +55,8 @@ public class ItemServiceImpl implements ItemService {
 		content.setTitle("test0045");
 		contentMapper.insert(content);
 		
-		int a = 1/0;
-		
+//		int a = 1/0;
+//		
 		TbContent content1 = new TbContent();
 		content1.setId(genItemId());
 		content1.setCategoryId(genItemId());
@@ -62,6 +71,31 @@ public class ItemServiceImpl implements ItemService {
 		System.out.println(res);
 		return 0;
 	}
+	
+	
+	@Override
+	public BootstrapTableResult itemList(int page, int rows, String searchText) {
+		//设置分页信息
+		PageHelper.startPage(page, rows);
+		//执行查询
+		TbItemExample example = new TbItemExample();
+		if(searchText != null && !"".equals(searchText)){
+			Criteria criteria = example.createCriteria();
+			criteria.andTitleLike("%" + searchText + "%");
+			
+			Criteria criteria2 = example.or();
+			criteria2.andSellPointLike("%" + searchText + "%");
+		}
+		List<TbItem> list = itemMapper.selectByExample(example);
+		//取查询结果
+		PageInfo<TbItem> pageInfo = new PageInfo<>(list);
+		BootstrapTableResult result = new BootstrapTableResult();
+		result.setRows(list);
+		result.setTotal(pageInfo.getTotal());
+		//返回结果
+		return result;
+	}
+
 	
 	
 	
@@ -84,6 +118,7 @@ public class ItemServiceImpl implements ItemService {
 		return id;
 	}
 
+	
 	
 
 

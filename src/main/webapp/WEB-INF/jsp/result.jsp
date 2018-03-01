@@ -39,9 +39,5 @@
 <div class="alert alert-success" role="alert">提示语</div>
 
   <button type="button" class="btn btn-default">Left</button>
-<!-- <div class="btn-group" role="group" aria-label="123123">
-  <button type="button" class="btn btn-default">Middle</button>
-  <button type="button" class="btn btn-default">Right</button>
-</div> -->
 </body>
 </html>
