@@ -20,3 +20,5 @@ target
 .project
 
 .settings
+
+/src/main/resources/properties/db.properties
